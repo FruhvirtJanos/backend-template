@@ -28,40 +28,47 @@ const postFetch = async (url, data) => {
     }
 }
 
-const ertekelesBetolt = (array) => {
-    const ol = document.getElementById('ertekeles-lista');
-    ol.replaceChildren();
-    for (let i = array.length-1; i >= 0; i--) {
-        
+const listaBetolt = (array) => {
+    let ul = document.getElementById('termek-lista');
+    ul.replaceChildren();
+    for (let i = 0; i < array.length; i++) {
         let li = document.createElement('li');
         li.classList = "list-group-item";
-        li.textContent = array[i];
-        
-        ol.appendChild(li);
+        li.textContent = "Termék: " + array[i].name + " | Ár: " + array[i].price + "Ft";
+
+        ul.appendChild(li);
     }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        const response = await getMethod("/api/ratings")
-        
-        document.getElementById('average').textContent = "Átlag: " + response.average;
-        ertekelesBetolt(response.ratings);
+        const response = await getMethod("/api/products");
 
-        document.getElementById('sendButton').addEventListener('click', async () => {
+        listaBetolt(response.products);
+
+
+        document.getElementById('hozzaadButton').addEventListener('click', async () => {
             try {
-                console.log(document.getElementById('ratingSelect').value);
-                const response = await postFetch("/api/ratings", {
-                    rating: Number(document.getElementById('ratingSelect').value)
+                const fetch_response = await postFetch('/api/products', {
+                    name: document.getElementById('nevInput').value,
+                    price: Number(document.getElementById('arInput').value)
                 });
 
-                ertekelesBetolt(response.ratings);
-                document.getElementById('average').textContent = "Átlag: " + response.average;
+                if (fetch_response) {
+                    document.getElementById('siker-div').textContent = fetch_response.message;
+                    setTimeout(() => {
+                        document.getElementById('siker-div').textContent = "";
+                    }, 3000)
+                }
+
+                const post_response = await getMethod('/api/products');
+
+                listaBetolt(post_response.products);
             }
             catch (error) {
                 console.log(error);
             }
-        });
+        })
     }
     catch(error) {
         console.log(error);

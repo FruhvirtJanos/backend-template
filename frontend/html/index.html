@@ -16,32 +16,38 @@
     </head>
     <body>
         <div class="container-fluid">
-            <div class="row mb-5 mt-5">
-                <div class="col-1">
-                    <select id="ratingSelect" class="form-select">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
-                <div class="col-6">
-                    <input type="button" id="sendButton" class="btn btn-dark" value="Beküldés">
-                </div>
-                <div class="col-3">
-                    <div class="row text-center">
-                        <h4 id="average"></h4>
+            <div class="row text-center bg-dark text-light">
+                <h1>ULTIMATE TERMÉK HOZZÁADÓ WEB-APPLIKÁCIÓ (1.0)</h1>
+            </div>
+            <div class="row mb-2 mt-5">
+                <div class="col-4">
+                    <div class="input-group">
+                        <label for="nev" class="input-group-text">Termék: </label>
+                        <input type="text" name="nev" class="form-control" id="nevInput">
                     </div>
                 </div>
+                <div class="col-4">
+                    <div class="input-group">
+                        <label for="ar" class="input-group-text">Ár: </label>
+                        <input type="number" name="ar" class="form-control" id="arInput">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <input type="button" id="hozzaadButton" class="btn btn-dark" value="Hozzáad">
+                </div>
             </div>
-            <div>
-                <label>Értékelések: </label>
-                <ul id="ertekeles-lista" class="list-group">
+            <div class="row mb-2">
+                <div class="col-12 text-danger" id="siker-div">
 
-                </ul>
+                </div>
             </div>
-            
+            <div class="row">
+                <div class="col-6">
+                    <ul id="termek-lista" class="list-group">
+
+                    </ul>
+                </div>
+            </div>
         </div>
     </body>
 </html>

@@ -41,22 +41,13 @@ router.get('/testsql', async (request, response) => {
     }
 });
 
-let ratings = [4, 3, 2, 5, 1, 1, 2, 3, 4];
+let static_id = 1; 
+let productsArray = [{id: 1, name: "Dando", price: 2}];
 
-const average = (array) => {
-    let sum = 0;
-    for (let i = 0; i < array.length; i++) {
-        sum += array[i];
-    }
-
-    return sum / array.length;
-}
-
-router.get('/ratings', async (request, response) => {
+router.get('/products', async (request, response) => {
     try {
         response.status(200).json({
-            ratings: ratings,
-            average: average(ratings)
+            products: productsArray
         });
     } catch (error) {
         response.status(500).json({
@@ -65,12 +56,16 @@ router.get('/ratings', async (request, response) => {
     }
 });
 
-router.post('/ratings', (request, response) => {
-    ratings.push(request.body.rating);
+router.post('/products', (request, response) => {
+    static_id++;
+    productsArray.push({
+        id: static_id,
+        name: request.body.name,
+        price: request.body.price
+    });
 
     response.status(200).json({
-        ratings: ratings,
-        average: average(ratings)
+        message: "Termék sikeresen hozzáadva!"
     });
 });
 
