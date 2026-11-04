@@ -16,9 +16,32 @@
     </head>
     <body>
         <div class="container-fluid">
-            <div class="row text-center">
-                <h1 class="display-1">A szerver fut.</h1>
+            <div class="row mb-5 mt-5">
+                <div class="col-1">
+                    <select id="ratingSelect" class="form-select">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <input type="button" id="sendButton" class="btn btn-dark" value="Beküldés">
+                </div>
+                <div class="col-3">
+                    <div class="row text-center">
+                        <h4 id="average"></h4>
+                    </div>
+                </div>
             </div>
+            <div>
+                <label>Értékelések: </label>
+                <ul id="ertekeles-lista" class="list-group">
+
+                </ul>
+            </div>
+            
         </div>
     </body>
 </html>

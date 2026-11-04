@@ -41,4 +41,37 @@ router.get('/testsql', async (request, response) => {
     }
 });
 
+let ratings = [4, 3, 2, 5, 1, 1, 2, 3, 4];
+
+const average = (array) => {
+    let sum = 0;
+    for (let i = 0; i < array.length; i++) {
+        sum += array[i];
+    }
+
+    return sum / array.length;
+}
+
+router.get('/ratings', async (request, response) => {
+    try {
+        response.status(200).json({
+            ratings: ratings,
+            average: average(ratings)
+        });
+    } catch (error) {
+        response.status(500).json({
+            message: 'Ez a végpont nem működik.'
+        });
+    }
+});
+
+router.post('/ratings', (request, response) => {
+    ratings.push(request.body.rating);
+
+    response.status(200).json({
+        ratings: ratings,
+        average: average(ratings)
+    });
+});
+
 module.exports = router;
